@@ -12,5 +12,8 @@
 
 **Brief description of your hack**
 
+Our application allows you to relive your festival experience the morning after the night before.
 
 **Why not tell us more about your team**
+
+The 414s were a group of friends and computer hackers who broke into dozens of high-profile computer systems, including ones at Los Alamos National Laboratory, Sloan-Kettering Cancer Center, and Security Pacific Bank, in the early 1980s.
