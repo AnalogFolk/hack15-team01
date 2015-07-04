@@ -1,0 +1,24 @@
+@import "compass";
+
+body {
+    @include display-flex;
+     @include flex-direction(column);
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    font-family: helvetica;
+    color: #333;
+}
+
+#map {
+    background-color: #eee;
+    @include flex-grow(1);
+}
+
+#stats {
+    background-color: #f1f1f1;
+    @include flex-grow(0);
+}
+
+#needle {
+    display:inline-block;
+}
