@@ -50,6 +50,7 @@ var Waypoint = Backbone.Model.extend({
 var Journey = Backbone.Collection.extend({
 
     model: Waypoint,
+    bearing: 0
 
     initialize: function(){
         _.bindAll(this, 'onRouteRecieved');
@@ -102,9 +103,29 @@ var Journey = Backbone.Collection.extend({
                 break;
             }
         }
+        this.setBearing();
+    },
+
+    updateBearing: function(position){
+
     }
 
 });
+
+
+function Compass(){
+    this.heading = 0;
+     _.bindAll(this, 'onCompassUpdate', 'onCompassError');
+    navigator.compass.watchHeading(this.onCompassUpdate, this.onCompassError);
+}
+
+Compass.prototype.onCompassUpdate = function(reading){
+    this.heading = reading.trueHeading;
+}
+
+Compass.prototype.onCompassError = function(){
+    console.log(arguments);
+}
 
 var Position = Backbone.Model.extend({
     initialize: function(){
@@ -131,6 +152,20 @@ var Position = Backbone.Model.extend({
             latitude: e.latLng.lat(),
             longitude: e.latLng.lng()
         })
+    },
+    bearingTo: function(position){
+        var lat1 = toRadians(this.attributes.latitude),
+            long1 = toRadians(this.attributes.longitude),
+            lat2 = toRadians(position.latitude),
+            long2 = toRadians(position.longitude);
+        var y = Math.sin(long2-long1) * Math.cos(lat2);
+        var x = Math.cos(lat1) * Math.sin(lat2) -
+                Math.sin(lat1) * Math.cos(lat2) * Math.cos(long2-long1);
+        var bearing = Math.atan2(y, x);
+            bearing = toDegrees(bearing);
+        if(bearing < 0) bearing += 360;
+        else if(bearing > 360) bearing -= 360;
+        return bearing;
     }
 })
 
