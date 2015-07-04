@@ -1,0 +1,23 @@
+/* line 3, ../sass/main.scss */
+body {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  font-family: helvetica;
+  color: #333;
+}
+
+/* line 12, ../sass/main.scss */
+#map {
+  background-color: #eee;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+
+/* line 17, ../sass/main.scss */
+#stats {
+  background-color: #f1f1f1;
+}

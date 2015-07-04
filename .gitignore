@@ -1,0 +1,9 @@
+Thumbs.db
+.DS_Store
+.sass-cache
+npm-debug.log
+node_modules
+*.sublime-project
+*.sublime-workspace
+.vagrant
+*.lock
