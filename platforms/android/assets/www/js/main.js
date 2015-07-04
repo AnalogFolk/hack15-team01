@@ -1,6 +1,6 @@
 // $GLOBALS -----------------------------------------------------------------------
 
-var PROXIMITY = 10;
+var PROXIMITY = 15;
 
 function toRadians(int){
     return (Math.PI / 180) * int;
@@ -10,12 +10,43 @@ function toDegrees(int){
     return int / (Math.PI/180);
 }
 
+function normaliseDegree(degree){
+    //console.log(degree);
+    if(degree > 360){
+        return degree - 360;
+    }
+    else if(degree < 0){
+        return 360 + degree;
+    }
+    return degree;
+}
+
 // Cache some selectors
 
 var heading = document.getElementById('heading');
 var bearing = document.getElementById('bearing');
 var direction = document.getElementById('direction');
 var needle = document.getElementById('needle');
+var needleContainer = document.getElementById('needle-container');
+var debugContainer = document.getElementById('debug-container');
+
+// $DEBUG -----------------------------------------------------------------------
+
+var needleShow = true;
+
+needleContainer.addEventListener('click', function(){
+    if(needleShow == true){
+        needleContainer.style.opacity = '0';
+        debugContainer.style.opacity = '1'
+        needleShow = false;
+    }
+    else {
+        needleContainer.style.opacity = '1';
+        debugContainer.style.opacity = '0'
+        needleShow = true;
+    }
+})
+
 
 // $WAYPOINT -----------------------------------------------------------------------
 
@@ -122,21 +153,30 @@ var Journey = Backbone.Collection.extend({
 
 
 function Compass(){
+    this.rotation = 0;
     this.heading = 0;
      _.bindAll(this, 'onCompassUpdate', 'onCompassError');
     navigator.compass.watchHeading(this.onCompassUpdate, this.onCompassError);
 }
 
 Compass.prototype.onCompassUpdate = function(reading){
-    console.log(reading)
-    this.heading = reading.trueHeading;
+    this.heading = normaliseDegree(reading.trueHeading);
     heading.innerHTML = this.heading;
 
     var needleDirection = Math.round(App.journey.bearing - this.heading);
+    needleDirection = normaliseDegree(needleDirection);
     direction.innerHTML = needleDirection;
+    this.spinNeedle(needleDirection);
+}
 
-    needle.style.webkitTransform = "rotate(" + needleDirection + "deg)";
-
+Compass.prototype.spinNeedle = function(nR) {
+    var aR;
+    aR = this.rotation % 360;
+    if ( aR < 0 ) { aR += 360; }
+    if ( aR < 180 && (nR > (aR + 180)) ) { this.rotation -= 360; }
+    if ( aR >= 180 && (nR <= (aR - 180)) ) { this.rotation += 360; }
+    this.rotation += (nR - aR);
+    needle.style.webkitTransform = "rotate(" + this.rotation + "deg)";
 }
 
 Compass.prototype.onCompassError = function(){
@@ -195,11 +235,11 @@ window.App = {
         this.initJourney();
         this.initPosition();
         this.initCompass();
-
         this.journey.on('reset', this.onJourneyReset, this);
         this.journey.fetch("51.528440, -0.106789", "51.520515, -0.105048");
     },
     initMap: function(){
+
         this.map = new google.maps.Map(document.getElementById('map'), {
             zoom: 19
         });

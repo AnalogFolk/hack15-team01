@@ -1,12 +1,21 @@
 @import "compass";
 
+html {
+    height: 100%;
+}
+
 body {
-    @include display-flex;
-     @include flex-direction(column);
     margin: 0;
     -webkit-font-smoothing: antialiased;
     font-family: helvetica;
     color: #333;
+    height: 100%;
+}
+
+#debug-container {
+    height: 100%;
+    @include display-flex;
+    @include flex-direction(column);
 }
 
 #map {
@@ -19,6 +28,24 @@ body {
     @include flex-grow(0);
 }
 
+#needle-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+
 #needle {
-    display:inline-block;
+    position: absolute;
+    background-image: url("../img/needle.png");
+    width: 150px;
+    height: 200px;
+    background-size: cover;
+    left: 50%;
+    top: 50%;
+    margin: -100px 0px 0px -75px;
+    @include transform-origin(50%, 100%);
+    @include transition(transform 0.2s linear);
 }
