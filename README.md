@@ -1,11 +1,13 @@
-# Team Needle
+# Needle
 
 
 **Team members**
-![Jordan Burnett](https://igcdn-photos-g-a.akamaihd.net/hphotos-ak-xfa1/t51.2885-19/11355287_1465001190464318_579528324_a.jpg)  | ![Des Holmes](https://igcdn-photos-d-a.akamaihd.net/hphotos-ak-xfa1/t51.2885-19/11355947_1618271205094371_356270357_a.jpg)
-:--- | :---
-**Jordan Burnett** | **Paul Davis**
-[@jorburn](https://twitter.com/jorburn) | [@thinkinpixels](https://twitter.com/thinkinpixels)
+
+|![Jordan Burnett](https://igcdn-photos-g-a.akamaihd.net/hphotos-ak-xfa1/t51.2885-19/11355287_1465001190464318_579528324_a.jpg)  | ![Paul Davis](https://igcdn-photos-d-a.akamaihd.net/hphotos-ak-xfa1/t51.2885-19/11355947_1618271205094371_356270357_a.jpg)|
+| :--- | :--- |
+| **Jordan Burnett** | **Paul Davis** |
+| [@jorburn](https://twitter.com/jorburn) | [@thinkinpixels](https://twitter.com/thinkinpixels) 
+
 
 **Brief description of our hack**
 
